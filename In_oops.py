@@ -1,6 +1,7 @@
 class Voting_program:                                                   #class for the voting_program
     def __init__(self):
         self.ids =[]   
+        self.candidatesofvoters=[]
         self.points_1 = 0                                               #setting the initial votes of the candidates as 0
         self.points_2 = 0
         self.condition = True                                           #initializing the condition for the loop to enter the votes
@@ -26,7 +27,12 @@ class Voting_program:                                                   #class f
         elif (self.points_1 > self.points_2):                                      #displaying results
             print("{} has won! by {} points".format(self.candidate_1, (self.points_1-self.points_2))) 
         else:
-            self.print("{} has won! by {} points".format(self.candidate_2, (self.points_2-self.points_1)))
+            print("{} has won! by {} points".format(self.candidate_2, (self.points_2-self.points_1)))
+
+    def ids_candidate(self):
+        result = dict(zip(self.ids, self.candidatesofvoters))
+        for i in result:
+            print(f"The id{i} voted for {result[i]} candidate!")
 
     def voting(self):
         while self.condition:
@@ -40,6 +46,7 @@ class Voting_program:                                                   #class f
                 self.ids.append(self.id)                                           #making a list of voter's id
                 self.candidate =input("Whom you want to cast the vote?Enter the name:-") #votes are casting
                 if self.candidate == "a" or self.candidate == "b":
+                    self.candidatesofvoters.append(self.candidate)
                     self.n+=1
                     if self.candidate == self.candidate_1:                         #votes are added to the candidate of voter's choice
                         self.points_1+=1
@@ -51,6 +58,7 @@ class Voting_program:                                                   #class f
                 self.condition=False 
             print("")
         self.result()
+        self.ids_candidate()
 
 voting_obj = Voting_program()                                                      #object of the voting_program
 voting_obj.display()                                                               #calling the methods
